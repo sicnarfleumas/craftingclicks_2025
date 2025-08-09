@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.draft !== true);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\/index\.(md|mdx)$/i, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Resolve featured image from the content collection folder using a glob import
+const imageModules = import.meta.glob('../../content/blog/**/featuredImage.*', { eager: true, import: 'default' });
+let featuredImageUrl: string | undefined = undefined;
+if (post?.id) {
+  const cleanedId = post.id.replace(/\/(index\.(md|mdx))$/, '');
+  const matchKey = Object.keys(imageModules).find((k) => k.includes(`/${cleanedId}/featuredImage`));
+  if (matchKey) {
+    featuredImageUrl = imageModules[matchKey] as unknown as string;
+  }
+}
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  featuredImage={featuredImageUrl ?? post.data.featuredImage}
+  featuredImageAlt={post.data.featuredImageAlt}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  tags={post.data.tags}
+  author={post.data.author}
+  readingTime={post.data.readingTime}
+>
+  <Content />
+</BlogLayout>
+
+

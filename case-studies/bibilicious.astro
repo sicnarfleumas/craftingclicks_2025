@@ -1,0 +1,398 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { Image } from 'astro:assets';
+import authors from '../../data/authors.json';
+import CaseStudyHero from '../../components/CaseStudies/CaseStudyHero.astro';
+import CaseStudyOverview from '../../components/CaseStudies/CaseStudyOverview.astro';
+import CaseStudyResults from '../../components/CaseStudies/CaseStudyResults.astro';
+import CaseStudyCta from '../../components/CaseStudies/CaseStudyCta.astro';
+import CaseStudyTestimonial from '../../components/CaseStudies/CaseStudyTestimonial.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+// Import the actual images for Bibilicious case study
+import bibiliciousLogo from '@assets/casestudies/bibilicious/bibilicious logo.svg';
+import heroImg from '@assets/casestudies/bibilicious/homepage-bento.png';
+import bentoGridLayout from '@assets/casestudies/bibilicious/web design bento grid example inspo layout.jpg';
+import languageSelector from '@assets/casestudies/bibilicious/language selector drop down.png';
+import pagespeedInsights from '@assets/casestudies/bibilicious/lighthouse scores - page speed scores.png';
+import englishBlogPost from '@assets/casestudies/bibilicious/english blog post page.png';
+import japaneseBlogPage from '@assets/casestudies/bibilicious/japanese blog page.png';
+import contactForm from '@assets/casestudies/bibilicious/contact form.png';
+import i18nSetup from '@assets/casestudies/bibilicious/i18n setup for bibilicious.png';
+
+// Consultant data
+const consultantId = "samuel-francis";
+const consultant = authors[consultantId as keyof typeof authors];
+
+// Case study metadata
+const caseStudy = {
+  title: "Bridging Languages and Cultures Through Elegant Translation",
+  client: "Bibilicious",
+  description: "How we created a multilingual translation service website with Japanese-inspired design, perfect performance scores, and seamless language switching between English, Japanese, and Tamil.",
+  pubDate: new Date("2023-12-10"),
+  images: [
+    {
+      src: heroImg,
+      alt: "Bibilicious homepage with bento grid layout",
+      caption: "Bento-style layout enhancing visual organization and aesthetics"
+    },
+    {
+      src: languageSelector,
+      alt: "Language selector dropdown showing multiple language options",
+      caption: "Intuitive language switching between English, Japanese, and Tamil"
+    },
+    {
+      src: pagespeedInsights,
+      alt: "PageSpeed Insights showing perfect scores for Bibilicious website",
+      caption: "Sub-1-second load times with perfect PageSpeed scores"
+    }
+  ],
+  services: ["Multilingual Website Development", "Japanese-Inspired Design", "Performance Optimization", "Content Management System", "Responsive Design", "Custom Animations", "SEO Implementation"],
+  challenge: "Bibilicious needed a professional online presence that could showcase translation services in three languages (English, Japanese, and Tamil), build credibility in the translation space, generate quality leads, and reflect Japanese aesthetics while remaining globally accessible.",
+  solution: "We built a culturally authentic website using Astro, React, and TypeScript with Japanese-inspired design elements, multilingual architecture with language-specific routing, custom animations like 'sakuraFade' and 'paperSlide', and a bento-style layout system for enhanced organization.",
+  results: [
+    "40% increase in high-quality client inquiries",
+    "Sub-1-second initial load times with perfect PageSpeed scores",
+    "Seamless content experience across three languages",
+    "Enhanced brand credibility in the translation space",
+    "Effective lead generation through optimized contact system"
+  ],
+  testimonial: {
+    quote: "The team transformed my vision into a digital reality. The site captures my translation philosophy while providing a seamless user experience. I've seen a significant rise in inquiries since launch.",
+    author: "Shruthi Lakshmi",
+    position: "Founder of Bibilicious"
+  },
+  tags: ["Multilingual Website", "Japanese-Inspired Design", "Performance Optimization", "Content Management", "i18n"]
+};
+
+// Technical highlights
+const technicalHighlights = [
+  {
+    title: "Multilingual Implementation",
+    description: "We implemented language-specific routing with /ja/ and /ta/ prefixes, created a content translation management system, and developed adaptive components for seamless UX across languages.",
+    image: i18nSetup,
+    alt: "i18n setup diagram for Bibilicious"
+  },
+  {
+    title: "Bento-Style Layout",
+    description: "Inspired by Japanese bento boxes, we created a visually structured layout system that enhances content organization while providing a distinctive cultural aesthetic.",
+    image: bentoGridLayout,
+    alt: "Bento grid layout example"
+  },
+  {
+    title: "Multilingual Blog Platform",
+    description: "We developed a blog system powered by MDX that supports content in three languages, fostering engagement and accessibility for diverse audiences.",
+    image: japaneseBlogPage,
+    alt: "Japanese blog page example"
+  },
+  {
+    title: "Sophisticated Contact System",
+    description: "Our contact system includes form validation for quality lead generation, spam protection with honeypot fields, and direct integration with Google Forms for streamlined management.",
+    image: contactForm,
+    alt: "Contact form with validation"
+  }
+];
+
+// Create breadcrumb items
+const breadcrumbItems = [
+  {
+    name: "Home",
+    url: "/"
+  },
+  {
+    name: "Case Studies",
+    url: "/case-studies"
+  },
+  {
+    name: caseStudy.client,
+    url: Astro.url.pathname,
+    current: true
+  }
+];
+---
+
+<CaseStudyLayout 
+  title={`${caseStudy.client} Case Study | Crafting Clicks`} 
+  description={caseStudy.description}
+  pubDate={caseStudy.pubDate}
+  client={caseStudy.client}
+  author={{
+    name: consultant.name,
+    url: consultant.social.linkedin
+  }}
+  image={heroImg.src}
+  tags={caseStudy.tags}
+>
+  <Breadcrumbs items={breadcrumbItems} />
+  <CaseStudyHero
+    title={caseStudy.title}
+    description={caseStudy.description}
+    clientName={caseStudy.client}
+    clientLogo={bibiliciousLogo}
+    heroImage={heroImg}
+    industry="Translation Services"
+    platformType="Multilingual Website"
+    timeline="8 weeks"
+  />
+
+  <CaseStudyOverview
+    clientName={caseStudy.client}
+    challenge={caseStudy.challenge}
+    solution={caseStudy.solution}
+    services={caseStudy.services}
+    consultant={consultant}
+  />
+
+  <section class="case-study-content">
+    <div class="container">
+      <h2 class="section-title">Project Overview</h2>
+      <p>
+        Bibilicious is a multilingual translation service specializing in English, Japanese, and Tamil. 
+        Founded by Shruthi Lakshmi, a language enthusiast and aspiring translator, the service aims to bridge 
+        cultures through accurate and culturally sensitive translations.
+      </p>
+      
+      <div class="image-gallery">
+        {caseStudy.images.map(image => (
+          <figure class="gallery-item">
+            <Image 
+              src={image.src} 
+              alt={image.alt} 
+              width={800} 
+              height={450} 
+              class="gallery-image"
+              loading="lazy"
+              format="webp"
+              quality={80}
+            />
+            <figcaption>{image.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <h2 class="section-title">Our Approach</h2>
+      <h3 class="content-subtitle">Discovery Phase</h3>
+      <p>
+        We began with an in-depth analysis of Shruthi's vision and audience. Her personal journey in 
+        language learning became a unique differentiator, guiding our design and content strategy.
+      </p>
+
+      <h3 class="content-subtitle">Design Strategy</h3>
+      <div class="strategy-grid">
+        <div class="strategy-item">
+          <h4>Japanese-Inspired Aesthetics</h4>
+          <ul>
+            <li>Subtle textures and transitions inspired by traditional Japanese design</li>
+            <li>Custom animations like "sakuraFade" and "paperSlide" for a cultural touch</li>
+            <li>A color palette drawn from traditional Japanese art</li>
+          </ul>
+        </div>
+        <div class="strategy-item">
+          <h4>Multilingual Architecture</h4>
+          <ul>
+            <li>Language-specific routing for intuitive navigation</li>
+            <li>A content translation system ensuring consistency across languages</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="content-subtitle">Development Approach</h3>
+      <div class="tech-stack">
+        <h4>Technical Stack</h4>
+        <ul class="tech-list">
+          <li>Astro – Optimized static site generation</li>
+          <li>React – Interactive components</li>
+          <li>TypeScript – Type safety and improved development experience</li>
+          <li>CSS Modules – Scoped styling for maintainability</li>
+        </ul>
+      </div>
+
+      <h2 class="section-title">Technical Highlights</h2>
+      <div class="technical-highlights">
+        {technicalHighlights.map(highlight => (
+          <div class="highlight-card">
+            <div class="highlight-content">
+              <h3>{highlight.title}</h3>
+              <p>{highlight.description}</p>
+            </div>
+            <div class="highlight-image">
+              <Image 
+                src={highlight.image} 
+                alt={highlight.alt} 
+                width={500} 
+                height={300}
+                loading="lazy"
+                format="webp"
+                quality={80}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CaseStudyResults results={caseStudy.results} />
+
+  <!-- Testimonial Section -->
+  <CaseStudyTestimonial
+    quote={caseStudy.testimonial.quote}
+    author={caseStudy.testimonial.author}
+    position={caseStudy.testimonial.position}
+  />
+
+  <CaseStudyCta 
+    title="Ready to Create Your Multilingual Website?" 
+    description="Let's discuss how we can help you bridge languages and cultures with a high-performance website."
+  />
+</CaseStudyLayout>
+
+<style>
+  .case-study-content {
+    padding: 4rem 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark-text);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    color: var(--dark-text);
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .gallery-item {
+    margin: 0;
+  }
+
+  .gallery-image {
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--medium-text);
+    text-align: center;
+  }
+
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .strategy-item {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .tech-stack {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .tech-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .tech-list li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .tech-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .technical-highlights {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+  }
+
+  .highlight-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .highlight-card:nth-child(even) {
+    direction: rtl;
+  }
+
+  .highlight-card:nth-child(even) .highlight-content {
+    direction: ltr;
+  }
+
+  .highlight-image img {
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+  }
+
+  .testimonial-section,
+  .testimonial-container,
+  .quote-icon,
+  .testimonial-quote,
+  .testimonial-author,
+  .testimonial-position {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .highlight-card {
+      grid-template-columns: 1fr;
+    }
+    
+    .highlight-card:nth-child(even) {
+      direction: ltr;
+    }
+  }
+</style> 

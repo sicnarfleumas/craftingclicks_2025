@@ -1,0 +1,24 @@
+---
+const team = [
+  { name: "Francis", role: "Founder / Full‑Stack", img: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg" },
+  { name: "Alex", role: "Design Lead", img: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg" },
+  { name: "Sam", role: "Frontend", img: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" },
+];
+---
+
+<section aria-labelledby="team-heading" class="section-alt py-20">
+  <div class="mx-auto max-w-7xl px-6">
+    <h2 id="team-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Meet the team</h2>
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {team.map((m) => (
+        <div class="group overflow-hidden rounded-2xl border border-neutral-200/70 bg-white p-5 text-center shadow-sm">
+          <img src={m.img} alt={m.name} loading="lazy" class="mx-auto h-28 w-28 rounded-full object-cover" />
+          <h3 class="mt-4 text-lg font-semibold">{m.name}</h3>
+          <p class="text-sm text-neutral-600">{m.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+

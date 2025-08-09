@@ -1,0 +1,126 @@
+---
+title: "Free Page Speed Checker | Analyze Your Website Performance"
+description: "Analyze your website's loading speed, Core Web Vitals, and performance metrics with our free page speed checker tool. Get detailed insights and actionable recommendations to improve user experience and SEO rankings."
+pubDate: 2024-01-23
+updatedDate: 2024-01-23
+category: "Performance"
+tags: ["speed", "optimization", "web-vitals", "seo"]
+keywords: ["page speed", "web performance", "core web vitals", "website optimization", "speed test"]
+status: "beta"
+developer: "samuel-francis"
+usageInstructions: "Enter your website URL in the input field and click 'Analyze'. The tool will evaluate various performance metrics and provide a detailed report with optimization suggestions."
+draft: false
+---
+import Tool from './components/PageSpeedChecker'
+
+<Tool client:load/>
+
+NOTE: The page speed checker is currently in beta and may not work as expected. We are working on it and will be adding more features soon.
+
+## Understanding Your Page Speed Results
+
+Our Page Speed Checker provides comprehensive insights into your website's performance across multiple dimensions. Here's how to interpret and make the most of your results:
+
+### Core Web Vitals
+
+The tool analyzes three critical metrics that Google uses to evaluate your website's user experience:
+
+1. **Largest Contentful Paint (LCP)**
+   - Measures loading performance
+   - Target: Under 2.5 seconds for a good user experience
+   - Shows when your main content has loaded
+
+2. **First Input Delay (FID)**
+   - Measures interactivity
+   - Target: Under 100 milliseconds
+   - Indicates how quickly your site responds to user interactions
+
+3. **Cumulative Layout Shift (CLS)**
+   - Measures visual stability
+   - Target: Under 0.1
+   - Helps identify unexpected layout shifts
+
+## Performance Metrics
+
+The detailed performance breakdown includes:
+
+- **Time to First Byte (TTFB)**: Initial server response time
+- **First Contentful Paint (FCP)**: When the first content appears
+- **Speed Index**: How quickly content is visually displayed
+- **Total Blocking Time**: Impact of scripts on interactivity
+
+## Why Page Speed Matters
+
+Website speed is crucial for several reasons:
+
+- **User Experience**: Faster sites provide a better user experience, reducing bounce rates and increasing engagement
+- **SEO Rankings**: Google uses page speed as a ranking factor, especially on mobile
+- **Conversion Rates**: Faster sites typically have higher conversion rates
+- **Mobile Performance**: With most traffic coming from mobile devices, speed is essential for mobile users
+
+## Common Speed Issues and Solutions
+
+### Render-Blocking Resources
+
+**Problem**: JavaScript and CSS files that block the rendering of your page.
+
+**Solution**: Defer non-critical JavaScript, inline critical CSS, and use async loading where appropriate.
+
+### Image Optimization
+
+**Problem**: Large, unoptimized images slow down page loading.
+
+**Solution**: Compress images, use modern formats like WebP, implement lazy loading, and serve appropriately sized images.
+
+### Server Response Time
+
+**Problem**: Slow server response increases Time to First Byte (TTFB).
+
+**Solution**: Upgrade hosting, implement caching, use a CDN, and optimize database queries.
+
+### Excessive JavaScript
+
+**Problem**: Heavy JavaScript slows down parsing, execution, and interactivity.
+
+**Solution**: Reduce unnecessary code, split code into smaller chunks, and defer non-critical scripts.
+
+<div className="callout-container">
+## Need Expert Help with Performance Optimization?
+
+Is your website not performing as fast as you'd like? Our team of performance optimization experts can help identify and fix the bottlenecks holding your site back. We offer:
+
+- Detailed performance audits
+- Custom optimization strategies
+- Implementation of recommended fixes
+- Ongoing performance monitoring
+
+[Contact us](/contact) today to discuss how we can help speed up your website and improve your user experience.
+</div>
+
+## Making Use of the Data
+
+To get the most value from your speed test results:
+
+1. **Focus on Core Web Vitals First**
+   - These metrics directly impact your SEO and user experience
+   - Prioritize fixing any metrics in the "poor" or "needs improvement" range
+
+2. **Review Network Requests**
+   - Look for large files that can be optimized
+   - Identify render-blocking resources
+   - Check for compression opportunities
+
+3. **Implement Recommendations**
+   - Start with critical issues
+   - Address important improvements systematically
+   - Document changes and retest regularly
+
+4. **Monitor Over Time**
+   - Run regular tests to track improvements
+   - Compare mobile and desktop performance
+   - Watch for performance regressions
+
+Remember, website optimization is an ongoing process. Regular testing and monitoring help maintain optimal performance as your site evolves.
+
+
+

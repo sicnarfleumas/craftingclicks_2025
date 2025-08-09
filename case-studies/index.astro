@@ -1,0 +1,331 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import FormattedDate from '@components/FormattedDate.astro';
+import authors from '../../data/authors.json';
+import caseStudiesData from '../../data/case-studies.json';
+import CaseStudyCta from '../../components/CaseStudies/CaseStudyCta.astro';
+
+// Import case study images dynamically based on paths in the JSON
+import bigbMMALogo from '@assets/casestudies/bigb-mma/bigbmma-logo.png';
+import quintAllyLogo from '@assets/casestudies/quint-ally/quintally-logo.webp';
+import bibiliciousLogo from '@assets/casestudies/bibilicious/bibilicious logo.svg';
+
+// Map image paths to imported image objects
+const imageMap: Record<string, any> = {
+  '@assets/casestudies/bigb-mma/bigbmma-logo.png': bigbMMALogo,
+  '@assets/casestudies/quint-ally/quintally-logo.webp': quintAllyLogo,
+  '@assets/casestudies/bibilicious/bibilicious logo.svg': bibiliciousLogo
+};
+
+// Process the case studies data - convert string dates to Date objects and use actual images
+const caseStudies = caseStudiesData.map(study => ({
+  ...study,
+  pubDate: new Date(study.pubDate),
+  imageObject: imageMap[study.image] || bigbMMALogo // Fallback to bigbMMALogo if image not found
+}));
+
+// Filter out draft case studies for production
+const publishedStudies = import.meta.env.PROD 
+  ? caseStudies.filter((study) => !study.draft)
+  : caseStudies;
+
+
+---
+
+<MainLayout title="Our Work | Crafting Clicks - Transformative Digital Solutions" description="Explore our portfolio of client success stories. See how we've helped businesses transform their digital presence and achieve measurable results.">
+  <section class="case-studies-hero">
+    <div class="container">
+      <h1>Our <span class="highlight">Case Studies</span></h1>
+      <p class="subtitle">See how we've helped businesses achieve remarkable digital transformations</p>
+    </div>
+  </section>
+  
+  <section class="case-studies-list">
+    <div class="container">
+      <div class="case-studies-grid">
+        {publishedStudies.map((study) => (
+          <article class="case-study-card">
+            <a href={`/case-studies/${study.slug}`} class="card-link" aria-label={`View ${study.title} case study`}></a>
+            <div class="case-image-container">
+              <div class="logo-background">
+                <Image 
+                  src={study.imageObject} 
+                  alt={study.imageAlt} 
+                  class="case-image" 
+                  width={800}
+                  height={450}
+                  loading="lazy"
+                  format="webp"
+                  quality={80}
+                />
+              </div>
+            </div>
+            
+            <div class="case-content">
+              <p class="client-name">{study.client}</p>
+              <h2 class="case-title">
+                <a href={`/case-studies/${study.slug}`}>{study.title}</a>
+              </h2>
+              <p class="case-description">{study.description}</p>
+              
+              <div class="case-meta">
+                <div class="services-list">
+                  {study.services.slice(0, 3).map((service) => (
+                    <span class="service-tag">{service}</span>
+                  ))}
+                  {study.services.length > 3 && <span class="service-tag">+{study.services.length - 3} more</span>}
+                </div>
+              </div>
+              <a href={`/case-studies/${study.slug}`} class="arrow-link">View Case Study</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <CaseStudyCta 
+    customHeading="Ready to Create Your Own Success Story?"
+    customText="Let's transform your digital presence and deliver measurable results for your business."
+    primaryButtonText="Start Your Transformation"
+    secondaryButtonText=""
+    secondaryButtonUrl=""
+  />
+</MainLayout>
+
+<style>
+  /* Hero Section - Using similar styling to blog hero */
+  .case-studies-hero {
+    background-color: var(--dark-bg);
+    color: white;
+    text-align: center;
+    padding: 5rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--box-shadow);
+    background-image: linear-gradient(to right, rgba(26, 32, 44, 0.95), rgba(26, 32, 44, 0.9)), 
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+  
+  .case-studies-hero .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .case-studies-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  
+  .highlight {
+    color: var(--orange);
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: var(--font-family-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  
+  /* Case Studies List Section */
+  .case-studies-list {
+    padding: 4rem 0;
+  }
+  
+  .case-studies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+  }
+  
+  /* Case Study Card */
+  .case-study-card {
+    background-color: var(--white);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .case-study-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  
+  .case-image-container {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background-color: #f8f8f8;
+  }
+  
+  .logo-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.02) 10px,
+      rgba(0, 0, 0, 0.02) 20px
+    );
+  }
+  
+  .case-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+  }
+  
+  .case-study-card:hover .case-image {
+    transform: scale(1.05);
+  }
+  
+  .case-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+  
+  .client-name {
+    color: var(--orange);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .case-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  
+  .case-title a {
+    color: var(--dark-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .case-title a:hover {
+    color: var(--orange);
+  }
+  
+  .case-description {
+    font-size: 1rem;
+    color: var(--body-text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-family: var(--font-family-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+  
+  .case-meta {
+    margin-top: auto;
+  }
+  
+  .services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .service-tag {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    background-color: var(--light-bg);
+    border-radius: 2rem;
+    color: var(--body-text);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: var(--font-family-secondary);
+  }
+  
+  .service-tag:hover {
+    background-color: var(--orange);
+    color: var(--white);
+  }
+  
+  .case-footer {
+    display: none;
+  }
+  
+  .consultant {
+    display: none;
+  }
+  
+  .consultant-avatar {
+    display: none;
+  }
+  
+  .case-study-card .arrow-link {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .case-study-card:hover .arrow-link {
+    color: var(--white);
+    background-color: var(--orange);
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .case-studies-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .case-studies-hero h1 {
+      font-size: 3rem;
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .case-studies-hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .case-content {
+      padding: 1.5rem;
+    }
+  }
+</style> 

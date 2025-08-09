@@ -1,0 +1,26 @@
+---
+const faqs = [
+  { q: "How long does a typical project take?", a: "Most sites launch in 4–8 weeks depending on scope and content readiness." },
+  { q: "What stack do you use?", a: "Astro + React with an islands architecture for speed. We prioritize accessibility and performance." },
+  { q: "Do you offer ongoing support?", a: "Yes — retainers for ongoing CRO, content, and enhancements are available." },
+];
+---
+
+<section id="faq" aria-labelledby="faq-heading" class="section-soft py-20">
+  <div class="mx-auto max-w-3xl px-6">
+    <h2 id="faq-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">FAQs</h2>
+    <div class="mt-6 divide-y divide-neutral-200/70 rounded-2xl border border-neutral-200/70 bg-white shadow-sm">
+      {faqs.map((f, idx) => (
+        <details class="group px-5 py-4" open={idx === 0}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+            <span class="text-base font-medium">{f.q}</span>
+            <span class="text-neutral-400 transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-2 text-sm text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+

@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --cc-orange-50: #fff3e9;
+  --cc-orange-100: #ffe3d1;
+  --cc-orange-200: #ffd3bd;
+  --cc-orange-300: #ffb792;
+  --cc-orange-400: #ff9b6b;
+  --cc-orange-500: #ff7849; /* primary accent */
+  --cc-orange-600: #ff6a33;
+}
+
+.btn-primary {
+  @apply rounded-full bg-[color:var(--cc-orange-500)] px-6 py-3 text-white font-semibold shadow transition-colors hover:bg-[color:var(--cc-orange-600)];
+}
+
+/* Smooth gradient backdrop utility used in hero */
+.gradient-hero {
+  background-image:
+    radial-gradient(80% 60% at 70% -10%, var(--cc-orange-200) 0%, transparent 55%),
+    radial-gradient(70% 60% at -10% 120%, #fff0e5 0%, transparent 60%);
+  background-size: 100% 100%, 100% 100%;
+  animation: gradientShift 18s ease-in-out infinite alternate;
+}
+
+html {
+  font-feature-settings: "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle background variants for sections (replace hard borders) */
+.section-soft {
+  background-image: linear-gradient(to bottom, #fafafa 0%, #ffffff 60%);
+}
+
+.section-alt {
+  background-image: linear-gradient(to bottom, #ffffff 0%, #fafafa 60%);
+}
+
+/* Gentle animated shift for hero gradients */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 8% 6%, -4% 100%;
+  }
+}

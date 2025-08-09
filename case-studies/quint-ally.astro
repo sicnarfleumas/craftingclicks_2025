@@ -1,0 +1,1606 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { Image } from 'astro:assets';
+import authors from '../../data/authors.json';
+import CaseStudyHero from '../../components/CaseStudies/CaseStudyHero.astro';
+import CaseStudyOverview from '../../components/CaseStudies/CaseStudyOverview.astro';
+import CaseStudyResults from '../../components/CaseStudies/CaseStudyResults.astro';
+import CaseStudyCta from '../../components/CaseStudies/CaseStudyCta.astro';
+import CaseStudyTestimonial from '../../components/CaseStudies/CaseStudyTestimonial.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+// Import the actual images for Quint Ally case study
+import quintAllyLogo from '@assets/casestudies/quint-ally/quintally-logo.webp';
+import heroImg from '@assets/casestudies/quint-ally/quintally-hero.png';
+import oldTheme from '@assets/casestudies/quint-ally/old-theme.png';
+import vendorHomepage from '@assets/casestudies/quint-ally/vendor-homepage.png';
+import vendorOnboarding from '@assets/casestudies/quint-ally/vendor-onboarding-platform.png';
+import allyHomepage from '@assets/casestudies/quint-ally/ally-homepage.png';
+import allyQuiz from '@assets/casestudies/quint-ally/ally-quiz.png';
+import goldMembersHomepage from '@assets/casestudies/quint-ally/gold-members-homepage.png';
+import hyperPersonalizedForm from '@assets/casestudies/quint-ally/hyper-personalized-vendor-onboarding-multi-step-form.png';
+import pagespeedInsights from '@assets/casestudies/quint-ally/page speed performance quint ally.png';
+
+// Consultant data
+const consultantId = "samuel-francis";
+const consultant = authors[consultantId as keyof typeof authors];
+
+// Case study metadata
+const caseStudy = {
+  title: "Personalized Digital Experience for High-Net-Worth Clients",
+  client: "Quint Ally",
+  description: "How we transformed Quint Ally's online presence with a blazing-fast, conversion-focused website tailored specifically for high-net-worth individuals and business owners.",
+  pubDate: new Date("2023-11-15"),
+  images: [
+    {
+      src: vendorHomepage,
+      alt: "Quint Ally vendor homepage showing premium service listings",
+      caption: "The redesigned vendor platform showcasing high-value professional services"
+    },
+    {
+      src: hyperPersonalizedForm,
+      alt: "Personalized multi-step onboarding form",
+      caption: "Hyper-personalized onboarding experience for premium vendors"
+    },
+    {
+      src: goldMembersHomepage,
+      alt: "Exclusive Gold Members section",
+      caption: "The exclusive Gold Members area reflecting luxury and exclusivity"
+    }
+  ],
+  services: [
+    "Multi-Persona UX Design",
+    "Hyper-Personalized Onboarding",
+    "Premium Platform Development",
+    "Email Automation with Amazon SES",
+    "High-Performance Database with Turso",
+    "Content Collections Integration"
+  ],
+  challenge: "Quint Ally's previous website used a one-size-fits-all approach that failed to effectively cater to their three distinct user personas: premium vendors ($100k+ revenue), commission-based allies, and exclusive gold members. This resulted in confused messaging and poor conversion rates across all segments.",
+  solution: "We reimagined their digital presence with three distinct, persona-specific experiences powered by modern tech stack (Astro, React, Turso). Each journey was carefully crafted to match the expectations and needs of its target audience - from luxury-focused vendor onboarding to gamified ally qualification.",
+  results: [
+    "Created distinct, conversion-optimized journeys for all three user personas",
+    "Implemented hyper-personalized onboarding achieving 40% higher completion rates",
+    "Integrated automated email workflows through Amazon SES for seamless communication",
+    "Built high-performance vendor platform using Turso and Content Collections",
+    "Maintained exclusivity of Gold Membership while improving digital experience"
+  ],
+  testimonial: {
+    quote: "The Crafting Clicks team truly understood our unique market position and the sophisticated clients we serve. They didn't just build us a website—they created a digital experience that perfectly aligns with our brand values and effectively communicates our expertise to high-net-worth individuals.",
+    author: "Ankush Seghal",
+    position: "Founder & CEO, Quint Ally"
+  },
+  cta: "Whether you're reaching affluent audiences or expanding to new markets, we can create a digital presence that resonates with your ideal customers.",
+  tags: ["Multi-Persona Design", "Premium Platform", "Hyper-Personalization", "High-Performance"],
+  keywords: ["Premium Service Platform", "High-Net-Worth Marketing", "Multi-Persona UX", "Personalized User Experience"]
+};
+
+// Create breadcrumb items
+const breadcrumbItems = [
+  {
+    name: "Home",
+    url: "/"
+  },
+  {
+    name: "Case Studies",
+    url: "/case-studies"
+  },
+  {
+    name: caseStudy.client,
+    url: Astro.url.pathname,
+    current: true
+  }
+];
+---
+
+<CaseStudyLayout 
+  title={`${caseStudy.client} Case Study | Crafting Clicks`} 
+  description={caseStudy.description}
+  pubDate={caseStudy.pubDate}
+  client={caseStudy.client}
+  author={{
+    name: consultant.name,
+    url: consultant.social.linkedin
+  }}
+  image={heroImg.src}
+  tags={caseStudy.tags}
+>
+  <Breadcrumbs items={breadcrumbItems} />
+  <CaseStudyHero
+    title={caseStudy.title}
+    description={caseStudy.description}
+    clientName={caseStudy.client}
+    clientLogo={quintAllyLogo}
+    heroImage={heroImg}
+    industry="Professional Services"
+    platformType="Multi-Persona Marketplace"
+    timeline="12 Weeks"
+  />
+
+  <CaseStudyOverview
+    clientName={caseStudy.client}
+    challenge={caseStudy.challenge}
+    solution={caseStudy.solution}
+    services={caseStudy.services}
+    consultant={consultant}
+  />
+
+  <!-- Main Content Section - Restructured for better narrative flow -->
+  <section class="case-study-content">
+    <div class="container">
+      <h2 class="section-title">The Challenge: One Platform, Three Distinct Audiences</h2>
+      <p>When Quint Ally approached us, they faced a unique challenge: their platform needed to serve three completely different user personas, each with distinct needs and expectations. Their existing website's one-size-fits-all approach was failing to resonate with any of these groups effectively.</p>
+      
+      <div class="content-image">
+        <Image 
+          src={oldTheme} 
+          alt="Previous Quint Ally website showing single theme approach" 
+          class="feature-image" 
+          width={800} 
+          height={400}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <p class="image-caption">The previous website's singular approach failed to address unique needs of different user groups</p>
+      </div>
+      
+      <h3 class="content-subtitle">Understanding the Three Personas</h3>
+      <div class="persona-grid">
+        <div class="persona-card vendor">
+          <h4>Premium Vendors</h4>
+          <ul>
+            <li>$100,000+ annual revenue</li>
+            <li>Minimum service value of $1,000</li>
+            <li>High-net-worth business owners</li>
+            <li>Seeking premium positioning</li>
+          </ul>
+        </div>
+        
+        <div class="persona-card ally">
+          <h4>Commission Allies</h4>
+          <ul>
+            <li>Students and young professionals</li>
+            <li>Seeking online income opportunities</li>
+            <li>Need clear qualification criteria</li>
+            <li>Value educational resources</li>
+          </ul>
+        </div>
+        
+        <div class="persona-card gold">
+          <h4>Gold Members</h4>
+          <ul>
+            <li>Exclusive $1,000 membership</li>
+            <li>Limited to 100 members</li>
+            <li>Access to closed events</li>
+            <li>Expect luxury experience</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-title">Our Strategic Approach</h2>
+      <p>After thorough research and stakeholder interviews, we developed a multi-faceted strategy that would address the unique needs of each persona while maintaining a cohesive brand identity. Our approach focused on creating three distinct yet interconnected experiences:</p>
+      
+      <div class="strategy-section">
+        <ol class="strategy-list">
+          <li><strong>Persona-Specific User Journeys</strong> - Custom pathways tailored to each user type's goals and expectations</li>
+          <li><strong>Consistent Brand Elements</strong> - Unified visual language adapted to different contexts</li>
+          <li><strong>Optimized Performance</strong> - Lightning-fast load times across all sections</li>
+          <li><strong>Conversion-Focused Design</strong> - Each journey optimized for its specific conversion goals</li>
+          <li><strong>Seamless Technical Integration</strong> - Unified backend supporting different frontend experiences</li>
+        </ol>
+      </div>
+
+      <h2 class="section-title">Solution: Three Tailored Experiences</h2>
+      
+      <!-- New Card-Based Solution Layout -->
+      <div class="solution-cards-container">
+        <!-- Premium Vendor Experience Card -->
+        <div class="solution-card vendor">
+          <div class="solution-card-header">
+            <h3>Premium Vendor Experience</h3>
+            <div class="solution-badge">High-Value Services</div>
+          </div>
+          
+          <p class="solution-description">For vendors generating $100,000+ in revenue, we created a sophisticated onboarding experience that reflects their professional status.</p>
+          
+          <div class="solution-highlights">
+            <div class="highlight-item">
+              <h4>Luxury-Focused Interface</h4>
+              <p>The vendor homepage was designed with a premium aesthetic that reflects the high-value nature of listed services. Subtle animations, refined typography, and strategic use of white space create an environment that feels exclusive and professional.</p>
+            </div>
+            
+            <div class="solution-image-container">
+              <Image 
+                src={vendorHomepage} 
+                alt="Premium vendor homepage showcasing sophisticated design" 
+                class="solution-image" 
+                width={650} 
+                height={350}
+                loading="lazy"
+                format="webp"
+                quality={80}
+              />
+              <p class="image-caption">The vendor homepage reflects the premium positioning of listed services</p>
+            </div>
+            
+            <div class="highlight-item">
+              <h4>Hyper-Personalized Onboarding</h4>
+              <p>The multi-step onboarding form adapts in real-time to each vendor's responses, creating a tailored path that feels curated specifically for their business. This approach resulted in a 40% increase in completion rates.</p>
+            </div>
+            
+            <div class="solution-image-container">
+              <Image 
+                src={hyperPersonalizedForm} 
+                alt="Hyper-personalized vendor onboarding form" 
+                class="solution-image"
+                width={650} 
+                height={350}
+                loading="lazy"
+                format="webp"
+                quality={80}
+              />
+              <p class="image-caption">The multi-step onboarding form creates a personalized experience for each vendor</p>
+            </div>
+          </div>
+          
+          <div class="solution-tech">
+            <h4>Technical Implementation</h4>
+            <p>Built with Content Collections API for efficient profile management and service listings, combined with Turso database for lightning-fast search. React components power interactive elements with Amazon SES integration for automated communications.</p>
+          </div>
+        </div>
+        
+        <!-- Empowering Allies Card -->
+        <div class="solution-card ally">
+          <div class="solution-card-header">
+            <h3>Empowering Allies</h3>
+            <div class="solution-badge">Gamified Qualification</div>
+          </div>
+          
+          <p class="solution-description">For potential allies seeking commission opportunities, we developed a gamified qualification process that makes learning about the platform engaging and informative.</p>
+          
+          <div class="solution-highlights">
+            <div class="highlight-item">
+              <h4>Clear Path to Success</h4>
+              <p>The ally section focuses on clear steps to qualification with prominent calls-to-action and visual guides that highlight potential earnings and opportunities.</p>
+            </div>
+            
+            <div class="solution-image-container">
+              <Image 
+                src={allyHomepage} 
+                alt="Ally homepage with clear path to success" 
+                class="solution-image" 
+                width={650} 
+                height={350}
+                loading="lazy"
+                format="webp"
+                quality={80}
+              />
+              <p class="image-caption">The ally section focuses on clear opportunities and qualification steps</p>
+            </div>
+            
+            <div class="highlight-item">
+              <h4>Interactive Qualification</h4>
+              <p>The gamified quiz makes the qualification process engaging while educating potential allies about the platform and setting appropriate expectations.</p>
+            </div>
+            
+            <div class="solution-image-container">
+              <Image 
+                src={allyQuiz} 
+                alt="Qualification quiz for potential allies" 
+                class="solution-image" 
+                width={650}
+                height={350}
+                loading="lazy"
+                format="webp"
+                quality={80}
+              />
+              <p class="image-caption">Interactive quiz ensures allies understand the platform and requirements</p>
+            </div>
+          </div>
+          
+          <div class="solution-tech">
+            <h4>Technical Implementation</h4>
+            <p>Progressive disclosure principles guide users through each step, with gamification elements built using lightweight JavaScript. Real-time scoring using Turso database with automated email notifications through Amazon SES.</p>
+          </div>
+        </div>
+        
+        <!-- Gold Membership Card -->
+        <div class="solution-card gold">
+          <div class="solution-card-header">
+            <h3>Exclusive Gold Membership</h3>
+            <div class="solution-badge">Premium Access</div>
+          </div>
+          
+          <p class="solution-description">For the elite Gold Members paying $1,000 for exclusive access, we created an experience that reflects the premium nature of their membership.</p>
+          
+          <div class="solution-highlights">
+            <div class="highlight-item">
+              <h4>Luxury Digital Experience</h4>
+              <p>The Gold Members area balances exclusivity with functionality, providing premium features and content with an interface that reinforces the elite status of membership.</p>
+            </div>
+            
+            <div class="solution-image-container">
+              <Image 
+                src={goldMembersHomepage} 
+                alt="Exclusive Gold Members area" 
+                class="solution-image" 
+                width={650} 
+                height={350} 
+                loading="lazy"
+                format="webp"
+                quality={80}
+              />
+              <p class="image-caption">The Gold Members area maintains exclusivity while providing premium features</p>
+            </div>
+          </div>
+          
+          <div class="solution-tech">
+            <h4>Technical Implementation</h4>
+            <p>Secure authentication and personalized dashboards powered by Turso database with custom content delivery based on member preferences and history.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Unified Technical Architecture</h2>
+      <p>While each persona experience is distinct in its presentation and flow, they're all powered by a unified technical backbone that ensures consistency, performance, and scalability:</p>
+      
+      <div class="tech-features">
+        <div class="tech-feature">
+          <h4>Amazon SES Integration</h4>
+          <p>Automated email workflows handle:</p>
+          <ul>
+            <li>Quiz completion notifications</li>
+            <li>Vendor onboarding confirmations</li>
+            <li>Gold membership communications</li>
+            <li>Personalized welcome messages</li>
+          </ul>
+        </div>
+        
+        <div class="tech-feature">
+          <h4>Turso Database</h4>
+          <p>High-performance libSQL backend enables:</p>
+          <ul>
+            <li>Lightning-fast vendor searches</li>
+            <li>Real-time quiz scoring</li>
+            <li>Efficient member management</li>
+            <li>Seamless data retrieval</li>
+          </ul>
+        </div>
+        
+        <div class="tech-feature">
+          <h4>Content Collections API</h4>
+          <p>Streamlined content management for:</p>
+          <ul>
+            <li>Vendor profiles and services</li>
+            <li>Educational resources</li>
+            <li>Member-exclusive content</li>
+            <li>Platform updates</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="content-image">
+        <Image 
+          src={pagespeedInsights} 
+          alt="PageSpeed Insights showing excellent performance" 
+          class="feature-image" 
+          width={800} 
+          height={400} 
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <p class="image-caption">Optimized performance across all three user experiences</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Results Section - Moved to after the solution explanation -->
+  <CaseStudyResults
+    results={caseStudy.results}
+  />
+  
+  <!-- Testimonial Section -->
+  <CaseStudyTestimonial
+    quote={caseStudy.testimonial.quote}
+    author={caseStudy.testimonial.author}
+    position={caseStudy.testimonial.position}
+  />
+
+  <!-- Global CTA Section -->
+  <CaseStudyCta 
+    title="Ready to Transform Your Digital Presence?"
+    description="Whether you need to serve multiple user personas or create a premium digital experience, we can help you build a platform that resonates with your target audience."
+  />
+</CaseStudyLayout>
+
+<style>
+  /* Global Container */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Base Typography Improvements */
+  body {
+    line-height: 1.7;
+  }
+  
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  /* Hero Section */
+  .case-study-hero {
+    padding: 2rem 0 4rem;
+    background-color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-study-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: var(--light-bg);
+    z-index: 1;
+  }
+  
+  .breadcrumbs {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 3rem;
+  }
+  
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--body-text);
+    font-family: var(--font-family-secondary);
+  }
+  
+  .breadcrumbs li:not(:last-child)::after {
+    content: "/";
+    margin-left: 0.5rem;
+    color: var(--body-text);
+    opacity: 0.5;
+  }
+  
+  .breadcrumbs a {
+    color: var(--body-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .breadcrumbs a:hover {
+    color: var(--orange);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-text {
+    padding-right: 2rem;
+  }
+
+  .client-logo {
+    margin-bottom: 2rem;
+  }
+
+  .logo-image {
+    height: auto;
+    width: auto;
+    max-height: 40px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--dark-text);
+    line-height: 1.2;
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--body-text);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    font-family: var(--font-family-secondary);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--body-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--font-family-secondary);
+  }
+
+  .stat-value {
+    font-size: 1.1rem;
+    color: var(--dark-text);
+    font-weight: 600;
+  }
+
+  .hero-image-container {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform 0.3s ease;
+  }
+
+  .hero-image-container:hover {
+    transform: perspective(1000px) rotateY(-2deg);
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--accent-rgb), 0.1) 0%,
+      rgba(var(--orange-rgb), 0.1) 100%
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-content {
+      gap: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .case-study-hero {
+      padding: 2rem 0;
+    }
+
+    .case-study-hero::before {
+      display: none;
+    }
+
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero-text {
+      padding-right: 0;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-image-container {
+      transform: none;
+    }
+
+    .hero-image-container:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-stats {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  /* Overview Section */
+  .case-study-overview {
+    padding: 4rem 0;
+    background-color: var(--light-bg);
+  }
+  
+  .grid {
+    display: grid;
+  }
+  
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .md\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 768px) {
+    .md\:grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .md\:col-span-2 {
+      grid-column: span 2;
+    }
+    
+    .md\:col-span-1 {
+      grid-column: span 1;
+    }
+  }
+  
+  .gap-8 {
+    gap: 2rem;
+  }
+  
+  .mb-8 {
+    margin-bottom: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--dark-text);
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+    line-height: 1.3;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .service-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: var(--font-family-secondary);
+  }
+  
+  .service-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .consultant-card {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .consultant-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .consultant-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .consultant-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--light-bg);
+    color: var(--body-text);
+    transition: all 0.2s ease;
+  }
+  
+  .social-link:hover {
+    background-color: var(--orange);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+  
+  .social-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  /* Results Section */
+  .results-section {
+    padding: 4rem 0;
+    background-color: var(--white);
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    color: var(--dark-text);
+    line-height: 1.3;
+  }
+  
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .result-card {
+    background-color: var(--light-bg);
+    padding: 1.75rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Main Content Section - Updated with better UX */
+  .case-study-content {
+    padding: 4rem 0;
+    background-color: var(--light-bg);
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 3.5rem 0 2rem;
+    color: var(--dark-text);
+    text-align: center;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .content-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1.5rem;
+    color: var(--dark-text);
+  }
+  
+  .case-study-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-family: var(--font-family-secondary);
+    font-size: 1.05rem;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .content-image {
+    margin: 2.5rem auto;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    max-width: 950px;
+  }
+  
+  .feature-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+  
+  .image-caption {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--body-text);
+    margin-top: 1rem;
+    font-style: italic;
+    font-family: var(--font-family-secondary);
+  }
+  
+  /* Strategy Section Styles - Improved for readability */
+  .strategy-section {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    margin: 2.5rem auto;
+    box-shadow: var(--box-shadow);
+    max-width: 950px;
+  }
+  
+  .strategy-list {
+    padding-left: 1.5rem;
+    margin-bottom: 0;
+  }
+  
+  .strategy-list li {
+    margin-bottom: 1.25rem;
+    font-family: var(--font-family-secondary);
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  
+  .strategy-list li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .strategy-list li strong {
+    color: var(--accent);
+  }
+  
+  /* Persona Section Improved */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2.5rem auto;
+    max-width: 1000px;
+  }
+  
+  .persona-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+  
+  .persona-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .persona-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+  
+  .persona-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .persona-card li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: var(--font-family-secondary);
+    font-size: 1.05rem;
+  }
+  
+  .persona-card li:last-child {
+    border-bottom: none;
+  }
+  
+  /* New Solution Cards Layout */
+  .solution-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto 5rem;
+  }
+  
+  .solution-card {
+    background-color: var(--white);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    position: relative;
+  }
+  
+  .solution-card.vendor {
+    border-top: 5px solid var(--accent);
+  }
+  
+  .solution-card.ally {
+    border-top: 5px solid var(--orange);
+  }
+  
+  .solution-card.gold {
+    border-top: 5px solid var(--orange-dark);
+  }
+  
+  .solution-card-header {
+    padding: 2.5rem 3rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .solution-card-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+  
+  .solution-badge {
+    background-color: var(--light-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .vendor .solution-badge {
+    color: var(--accent);
+    background-color: rgba(var(--accent-rgb), 0.1);
+  }
+  
+  .ally .solution-badge {
+    color: var(--orange);
+    background-color: rgba(var(--orange-rgb), 0.1);
+  }
+  
+  .gold .solution-badge {
+    color: var(--orange-dark);
+    background-color: rgba(var(--orange-dark-rgb), 0.1);
+  }
+  
+  .solution-description {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    padding: 0 3rem 1.5rem;
+    margin-bottom: 0;
+    font-family: var(--font-family-secondary);
+  }
+  
+  .solution-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 0 0 2.5rem;
+  }
+  
+  .highlight-item {
+    padding: 0 3rem;
+  }
+  
+  .highlight-item h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+  
+  .highlight-item p {
+    margin-bottom: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  
+  .solution-image-container {
+    width: 100%;
+    padding: 0 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .solution-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    max-height: 400px;
+    object-fit: contain;
+  }
+  
+  .solution-image:hover {
+    transform: translateY(-5px);
+  }
+  
+  .solution-image-container .image-caption {
+    margin: 1rem 0 0;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--body-text);
+    font-style: italic;
+  }
+  
+  .solution-tech {
+    background-color: var(--light-bg);
+    padding: 2rem 3rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+  
+  .solution-tech::before {
+    content: "⚙️";
+    position: absolute;
+    left: 1.5rem;
+    top: 2rem;
+    font-size: 1.25rem;
+  }
+  
+  .solution-tech h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--dark-text);
+    margin-left: 1.5rem;
+  }
+  
+  .solution-tech p {
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+  }
+  
+  @media (max-width: 992px) {
+    .solution-card-header,
+    .solution-description,
+    .highlight-item,
+    .solution-image-container,
+    .solution-tech {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+    
+    .solution-image-container {
+      padding: 0 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .solution-card-header,
+    .solution-description,
+    .highlight-item,
+    .solution-image-container,
+    .solution-tech {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    
+    .solution-image-container {
+      padding: 0 1rem;
+    }
+    
+    .solution-card-header h3 {
+      font-size: 1.6rem;
+    }
+    
+    .solution-description {
+      font-size: 1.1rem;
+    }
+    
+    .highlight-item h4 {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .solution-card-header,
+    .solution-description,
+    .highlight-item,
+    .solution-image-container,
+    .solution-tech {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    
+    .solution-card-header h3 {
+      font-size: 1.5rem;
+    }
+    
+    .solution-highlights {
+      gap: 2.5rem;
+    }
+  }
+  
+  /* Persona Solution Section Styles - Better responsive behavior */
+  .persona-solution-section {
+    margin: 5rem 0;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  
+  .persona-solution-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .persona-heading {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 3px solid;
+    display: inline-block;
+    line-height: 1.3;
+  }
+  
+  .persona-heading.vendor {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  .persona-heading.ally {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+  
+  .persona-heading.gold {
+    color: var(--orange-dark);
+    border-color: var(--orange-dark);
+  }
+  
+  /* Implementation Grid Styles - Improved for readability on all devices */
+  .implementation-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    margin: 3rem auto;
+    max-width: 1100px;
+  }
+  
+  .implementation-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  @media (min-width: 992px) {
+    .implementation-item {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+  
+  .implementation-content {
+    padding: 0 1rem;
+  }
+  
+  .implementation-content h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: var(--dark-text);
+    line-height: 1.3;
+  }
+  
+  .implementation-content h5 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--dark-text);
+    line-height: 1.3;
+  }
+  
+  .implementation-content p {
+    margin-bottom: 1.75rem;
+    max-width: none;
+  }
+  
+  .tech-heading {
+    margin-top: 2.5rem;
+    font-size: 1.25rem;
+    color: var(--accent);
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .tech-heading::before {
+    content: "⚙️";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+  }
+  
+  .implementation-image {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+  }
+  
+  .implementation-image:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Updated Feature Highlights - Improved mobile layout */
+  .feature-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+  
+  .feature {
+    background-color: var(--white);
+    padding: 1.75rem;
+    border-radius: 0.75rem;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+  
+  .feature:hover {
+    transform: translateY(-3px);
+  }
+  
+  .feature h5 {
+    margin-bottom: 0.75rem;
+  }
+  
+  .feature p {
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+  
+  /* Tech Features Section */
+  .tech-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2.5rem auto;
+    max-width: 1100px;
+  }
+  
+  .tech-feature {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+    height: 100%;
+  }
+  
+  .tech-feature h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+  
+  .tech-feature p {
+    margin-bottom: 1rem;
+  }
+  
+  .tech-feature ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+  }
+  
+  .tech-feature li {
+    padding: 0.75rem 0;
+    font-family: var(--font-family-secondary);
+    display: flex;
+    align-items: center;
+    font-size: 1.05rem;
+  }
+  
+  .tech-feature li::before {
+    content: "→";
+    margin-right: 0.75rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  
+  /* Related Section - Better spacing and contrast */
+  .related-section {
+    padding: 5rem 0;
+    background-color: var(--light-bg);
+  }
+  
+  .related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 768px) {
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .related-card {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .related-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+  
+  .related-card p {
+    margin-bottom: 1.75rem;
+    font-family: var(--font-family-secondary);
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+  
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
+  }
+  
+  .arrow-link:hover {
+    color: var(--orange);
+  }
+  
+  .arrow-link::after {
+    content: "→";
+    margin-left: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .arrow-link:hover::after {
+    transform: translateX(3px);
+  }
+  
+  /* Responsive Improvements */
+  @media (max-width: 992px) {
+    .container {
+      width: 92%;
+    }
+    
+    .section-title {
+      font-size: 1.85rem;
+      margin: 3rem 0 1.75rem;
+    }
+    
+    .persona-heading {
+      font-size: 1.7rem;
+    }
+    
+    .tech-features {
+      grid-template-columns: 1fr;
+    }
+    
+    .implementation-grid {
+      gap: 4rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 94%;
+      padding: 0;
+    }
+    
+    .section-title {
+      font-size: 1.65rem;
+      max-width: 100%;
+    }
+    
+    .content-subtitle {
+      font-size: 1.4rem;
+    }
+    
+    .persona-heading {
+      font-size: 1.6rem;
+    }
+    
+    .strategy-section {
+      padding: 1.75rem;
+    }
+    
+    .testimonial-quote {
+      font-size: 1.3rem;
+    }
+    
+    .persona-grid,
+    .feature-highlights {
+      grid-template-columns: 1fr;
+    }
+    
+    .persona-solution-section {
+      margin: 4rem 0;
+      padding-bottom: 3rem;
+    }
+    
+    .implementation-item {
+      gap: 2.5rem;
+    }
+    
+    .implementation-content {
+      order: 2;
+      padding: 0;
+    }
+    
+    .implementation-image {
+      order: 1;
+    }
+    
+    .implementation-content h4 {
+      font-size: 1.3rem;
+    }
+    
+    .tech-heading {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      width: 95%;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+    
+    .content-subtitle {
+      font-size: 1.3rem;
+    }
+    
+    .persona-heading {
+      font-size: 1.4rem;
+      width: 100%;
+      border-bottom-width: 2px;
+    }
+    
+    .strategy-section {
+      padding: 1.5rem;
+    }
+    
+    .strategy-list {
+      padding-left: 1.25rem;
+    }
+    
+    .persona-card, 
+    .tech-feature, 
+    .feature, 
+    .related-card {
+      padding: 1.5rem;
+    }
+    
+    .implementation-content h4 {
+      font-size: 1.25rem;
+    }
+    
+    .testimonial-quote {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    
+    .persona-solution-section {
+      margin: 3rem 0;
+      padding-bottom: 2.5rem;
+    }
+    
+    .implementation-grid {
+      gap: 3.5rem;
+      margin: 2rem 0;
+    }
+    
+    .tech-features {
+      gap: 1.5rem;
+    }
+  }
+
+  /* Remove the old testimonial styling since it's now in the component */
+  .testimonial-section,
+  .testimonial-container,
+  .quote-icon,
+  .testimonial-quote,
+  .testimonial-author,
+  .testimonial-position {
+    display: none;
+  }
+</style> 

@@ -1,0 +1,34 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { caseStudies } from "../../data/caseStudies";
+
+export function getStaticPaths() {
+  return caseStudies.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const meta = caseStudies.find((c) => c.slug === slug);
+if (!meta) {
+  throw new Error(`Case study not found: ${slug}`);
+}
+const data = { client: meta.client, title: meta.title, description: meta.description, coverImage: meta.coverImage };
+const coverSrc = meta.coverImage;
+---
+
+<Layout title={`${data.client} — Case Study`}>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-4xl font-extrabold tracking-tight">{data.title}</h1>
+    <p class="mt-2 text-neutral-600">{data.description}</p>
+    {coverSrc && (
+      <img src={coverSrc} alt={data.title} class="mt-8 rounded-2xl shadow" loading="lazy" />
+    )}
+    <article class="prose prose-neutral mt-8">
+      {meta.slug === 'bibilicious' && (<slot name="bibilicious" />)}
+      {meta.slug === 'quint-ally' && (<slot name="quint-ally" />)}
+      {meta.slug === 'bigb-mma' && (<slot name="bigb-mma" />)}
+    </article>
+  </main>
+</Layout>
+
+
+

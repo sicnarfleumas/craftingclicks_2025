@@ -1,0 +1,681 @@
+:root {
+  --color-primary: #f97316;
+  --color-primary-rgb: 249, 115, 22;
+  --color-accent: #0ea5e9;
+  --color-accent-rgb: 14, 165, 233;
+  --color-text: #1e293b;
+  --color-text-lighter: #64748b;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-code: #1e293b;
+  --color-code-text: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--color-text);
+}
+
+/* Tool Container */
+.toolContainer {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border);
+}
+
+/* Tab Navigation */
+.tabNavigation {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.tabNavigation::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.tabButton {
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-lighter);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.tabButton:hover {
+  color: var(--color-text);
+}
+
+.activeTab {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tabContent {
+  padding: 0 1rem 2rem;
+}
+
+/* Schema Selector */
+.schemaSelector {
+  margin-bottom: 1.5rem;
+}
+
+.schemaSelector label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.schemaSelector select {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23475569' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  appearance: none;
+  padding-right: 2.5rem;
+}
+
+.schemaDescription {
+  background-color: var(--color-bg-secondary);
+  border-left: 3px solid var(--color-primary);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* Form Fields */
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.fieldGroup {
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: var(--color-bg-secondary);
+}
+
+.fieldGroupTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.formField {
+  margin-bottom: 1.25rem;
+}
+
+.formField:last-child {
+  margin-bottom: 0;
+}
+
+.formField label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  position: relative;
+}
+
+.optionalLabel {
+  color: var(--color-text-lighter);
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+/* Field importance styles */
+.fieldImportance {
+  font-size: 0.75rem;
+  font-weight: normal;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  display: inline-block;
+  float: right;
+}
+
+.fieldImportanceHigh {
+  background-color: rgba(var(--color-primary-rgb), 0.15);
+  color: var(--color-primary);
+}
+
+.fieldImportanceMedium {
+  background-color: rgba(var(--color-accent-rgb), 0.15);
+  color: var(--color-accent);
+}
+
+/* Inputs */
+.formField input,
+.formField textarea,
+.formField select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.formField input:focus,
+.formField textarea:focus,
+.formField select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.1);
+}
+
+.formField textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.fieldDescription {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-lighter);
+  line-height: 1.5;
+}
+
+/* Preview Section */
+.previewSection {
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 1rem;
+  margin-top: 1rem;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.editorPreviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.editorPreviewHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.codePreviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.codePreviewHeader h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-code-text);
+}
+
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.previewCode {
+  background-color: var(--color-bg-code);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.previewFormat {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.codeBlock {
+  padding: 1rem;
+  margin: 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  color: var(--color-code-text);
+}
+
+/* Rich Results Preview */
+.richResultsPreview {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.richResultsPreview h4 {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.richResultContainer {
+  border: 1px solid #dfe1e5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.productPreview, .articlePreview, .businessPreview, .genericPreview {
+  font-family: Arial, sans-serif;
+}
+
+.productTitle, .articleTitle, .businessTitle, .genericTitle {
+  font-size: 1.1rem;
+  color: #1a0dab;
+  margin-bottom: 0.25rem;
+  font-weight: normal;
+}
+
+.pricePreview {
+  color: #3c4043;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.ratingPreview {
+  color: #e7711b;
+  margin-bottom: 0.25rem;
+}
+
+.availabilityPreview {
+  color: #0b8043;
+  font-size: 0.9rem;
+}
+
+.articleMeta {
+  color: #70757a;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.businessAddress, .businessPhone, .businessHours {
+  color: #3c4043;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.genericDescription {
+  color: #3c4043;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.previewNote {
+  font-size: 0.8rem;
+  color: var(--color-text-lighter);
+  font-style: italic;
+}
+
+/* Validation Tab */
+.validateTab {
+  padding: 1.5rem;
+}
+
+.validationSection {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.validationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.validationTool {
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+}
+
+.validationTool h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.validationTool p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.validationLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.validationLink:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.9);
+}
+
+.validationNote {
+  background-color: #fffbeb;
+  border-left: 3px solid var(--color-warning);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.validationNote h4 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.validationNote ol {
+  margin: 0 0 0 1.25rem;
+  padding: 0;
+}
+
+.validationNote li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+/* Side-by-side Layout */
+.sideBySideLayout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Preview Toggle Buttons */
+.previewToggleButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: flex-end;
+}
+
+.previewToggleButton {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.previewToggleButton:hover {
+  border-color: var(--color-primary);
+}
+
+.previewToggleActive {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Toggle Button */
+.togglePreviewButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.togglePreviewButton:hover {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.togglePreviewButton svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .sideBySideLayout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .previewSection {
+    position: static;
+    margin-top: 2rem;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .formField input,
+  .formField textarea,
+  .formField select {
+    font-size: 1rem;  /* Slightly larger on mobile for better readability */
+  }
+  
+  .tabButton {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fieldGroup {
+    padding: 1.25rem 1rem;
+  }
+  
+  .validationTool {
+    padding: 1rem;
+  }
+}
+
+/* Implementation Container */
+.implementationContainer {
+  background-color: var(--color-bg-code);
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.implementationContainer h3 {
+  margin: 0;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--color-code-text);
+}
+
+.previewActions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem 1rem;
+  background-color: var(--color-bg-code);
+}
+
+.copyButton {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.copyButton:hover:not(:disabled) {
+  background-color: rgba(var(--color-primary-rgb), 0.9);
+}
+
+.copyButton:disabled {
+  background-color: rgba(var(--color-primary-rgb), 0.5);
+  cursor: default;
+}
+
+.implementationGuide {
+  padding: 1.5rem;
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.implementationGuide h3 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.implementationGuide ol {
+  margin: 0 0 1.5rem 1.25rem;
+  padding: 0;
+}
+
+.implementationGuide li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.implementationGuide code {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--color-primary);
+}
+
+.implementationTip {
+  padding: 1rem;
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.previewHeading {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigationButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.backButton, .primaryButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.backButton {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.backButton:hover {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-text-lighter);
+}
+
+.primaryButton {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.primaryButton:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.9);
+}
+
+.buttonIcon {
+  display: flex;
+  align-items: center;
+} 

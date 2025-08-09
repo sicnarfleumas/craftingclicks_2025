@@ -1,0 +1,973 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { Image } from 'astro:assets';
+import authors from '../../data/authors.json';
+import CaseStudyHero from '../../components/CaseStudies/CaseStudyHero.astro';
+import CaseStudyOverview from '../../components/CaseStudies/CaseStudyOverview.astro';
+import CaseStudyResults from '../../components/CaseStudies/CaseStudyResults.astro';
+import CaseStudyCta from '../../components/CaseStudies/CaseStudyCta.astro';
+import CaseStudyTestimonial from '../../components/CaseStudies/CaseStudyTestimonial.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+// Import the actual images for BigB MMA case study
+import bigbLogo from '@assets/casestudies/bigb-mma/bigbmma-logo.png';
+import heroImg from '@assets/casestudies/bigb-mma/bigbmma-hero image.png';
+import mobileDarkMode from '@assets/casestudies/bigb-mma/mobile-dark-mode.png';
+import mobileLightMode from '@assets/casestudies/bigb-mma/mobile-lightmode.png';
+import pagespeedInsights from '@assets/casestudies/bigb-mma/bigb-mma-pagespeed-insights.png';
+import schemaStructure from '@assets/casestudies/bigb-mma/bigbmma-schema.png';
+import blogContentCollection from '@assets/casestudies/bigb-mma/blog-content-collection.png';
+import coursesContentCollection from '@assets/casestudies/bigb-mma/bigb-mma-courses-content-collection.png';
+
+// Consultant data
+const consultantId = "samuel-francis";
+const consultant = authors[consultantId as keyof typeof authors];
+
+// Case study metadata
+const caseStudy = {
+  title: "Building a High-Performance Website for an MMA Gym",
+  client: "BigB MMA",
+  description: "How we built BigB MMA's first-ever website with mobile-optimized design, perfect PageSpeed scores, and content management capabilities that even non-technical owners can update.",
+  pubDate: new Date("2023-09-15"),
+  images: [
+    {
+      src: mobileLightMode,
+      alt: "BigB MMA website on mobile with light mode theme",
+      caption: "Mobile-optimized design with light mode theme"
+    },
+    {
+      src: mobileDarkMode,
+      alt: "BigB MMA website on mobile with dark mode theme",
+      caption: "Mobile-optimized design with dark mode theme"
+    },
+    {
+      src: pagespeedInsights,
+      alt: "PageSpeed Insights showing near-perfect scores for BigB MMA website",
+      caption: "Near-perfect PageSpeed Insights scores for optimal performance"
+    }
+  ],
+  services: ["Website Design & Development", "Mobile Optimization", "Performance Tuning", "Content Collections API Integration", "Structured Data Implementation", "Dark/Light Mode Theming"],
+  challenge: "BigB MMA had no web presence at all, despite having exceptional training programs and a growing reputation. They needed a mobile-first website that would be lightning fast, easy to update for non-technical staff, and designed to convert visitors into paying members.",
+  solution: "We built a completely custom website using our modern tech stack (Astro, React, Vercel) with both light and dark modes, content collections for blogs and courses, and implemented structured data for better SEO — all while achieving near-perfect PageSpeed scores.",
+  results: [
+    "Launched BigB MMA's first website with near-perfect PageSpeed scores (98/100)",
+    "Implemented mobile-optimized design with dark/light mode for improved user experience",
+    "Created a content management system that even non-technical staff can update via simple prompts",
+    "Built integrated blog and courses sections using Content Collections API",
+    "Implemented structured data for enhanced SEO and search result appearance"
+  ],
+  testimonial: {
+    quote: "The website Crafting Clicks built for us is exactly what we needed — fast, mobile-friendly, and surprisingly easy to update ourselves. Our members love being able to check the course schedule and blog posts on the go, and we've seen a significant increase in new inquiries since launch.",
+    author: "Belbin Samraj",
+    position: "Owner & Head Coach, BigB MMA"
+  },
+  cta: "Want a similar high-performance website that you can easily manage yourself? Let's create a custom solution that perfectly fits your business needs and empowers you to make updates without technical expertise.",
+  tags: ["Mobile-First Design", "Performance Optimization", "Content Management", "Dark/Light Mode", "Structured Data"],
+  keywords: ["MMA Gym Website", "Mobile-First Web Design", "Content Collections", "Non-Technical CMS", "High-Performance Website"]
+};
+
+// Create breadcrumb items
+const breadcrumbItems = [
+  {
+    name: "Home",
+    url: "/"
+  },
+  {
+    name: "Case Studies",
+    url: "/case-studies"
+  },
+  {
+    name: caseStudy.client,
+    url: Astro.url.pathname,
+    current: true
+  }
+];
+---
+
+<CaseStudyLayout 
+  title={`${caseStudy.client} Case Study | Crafting Clicks`} 
+  description={caseStudy.description}
+  pubDate={caseStudy.pubDate}
+  client={caseStudy.client}
+  author={{
+    name: consultant.name,
+    url: consultant.social.linkedin
+  }}
+  image={heroImg.src}
+  tags={caseStudy.tags}
+>
+  <Breadcrumbs items={breadcrumbItems} />
+  <CaseStudyHero
+    title={caseStudy.title}
+    description={caseStudy.description}
+    clientName={caseStudy.client}
+    clientLogo={bigbLogo}
+    heroImage={heroImg}
+    industry="Combat Sports & Fitness"
+    platformType="Content-Driven Website"
+    timeline="8 Weeks"
+  />
+
+  <CaseStudyOverview
+    clientName={caseStudy.client}
+    challenge={caseStudy.challenge}
+    solution={caseStudy.solution}
+    services={caseStudy.services}
+    consultant={consultant}
+  />
+
+  <CaseStudyResults
+    results={caseStudy.results}
+  />
+
+  <!-- Main Content Section -->
+  <section class="case-study-content">
+    <div class="container">
+      <h2 class="section-title">Creating a Mobile-First Digital Presence</h2>
+      <p>BigB MMA had established itself as a respected training facility with expert coaches and comprehensive programs, but they lacked any web presence at all. Our mission was to create a cutting-edge website that represented their real-world excellence, focusing especially on converting mobile users who make up the majority of their target audience.</p>
+      
+      <div class="content-image">
+        <div class="logo-container">
+          <Image 
+            src={bigbLogo} 
+            alt="BigB MMA official logo with distinctive branding elements" 
+            class="feature-image logo-image" 
+            width={200} 
+            height={200}
+            loading="eager"
+            format="webp"
+            quality={90}
+          />
+        </div>
+        <p class="image-caption">The BigB MMA brand needed a digital presence that matched its excellent local reputation</p>
+      </div>
+      
+      <h3 class="content-subtitle">Mobile-First Design with Theme Options</h3>
+      <p>Understanding that most users would access the site on mobile devices, we designed a completely responsive, mobile-first experience. We implemented both light and dark themes to enhance usability in different environments:</p>
+      
+      <div class="ux-features">
+        <div class="ux-feature">
+          <span class="ux-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+              <path fill="currentColor" d="M64 64v384H448V64H64zm368 368H80V80h352v352z"/>
+              <path fill="currentColor" d="M144 144h224v32H144zm0 64h224v32H144zm0 64h224v32H144zm0 64h160v32H144z"/>
+            </svg>
+          </span>
+          <span>Responsive layout optimized for all screen sizes</span>
+        </div>
+        <div class="ux-feature">
+          <span class="ux-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+              <path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391l-19.9 107.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0z"/>
+            </svg>
+          </span>
+          <span>Automatic light/dark mode detection based on user preferences</span>
+        </div>
+        <div class="ux-feature">
+          <span class="ux-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+              <path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zm64 0c0 141.4-114.6 256-256 256S0 397.4 0 256S114.6 0 256 0S512 114.6 512 256z"/>
+            </svg>
+          </span>
+          <span>Manual theme toggle for personalized experience</span>
+        </div>
+        <div class="ux-feature">
+          <span class="ux-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24">
+              <path fill="currentColor" d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zm72 96h80c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/>
+            </svg>
+          </span>
+          <span>Touch-friendly navigation and interface elements</span>
+        </div>
+      </div>
+      
+      <div class="content-image image-comparison">
+        <div class="comparison-container">
+          <div class="comparison-item">
+            <Image 
+              src={mobileLightMode} 
+              alt="BigB MMA website mobile interface in light mode showing clean, accessible design" 
+              class="feature-image comparison-image" 
+              width={250} 
+              height={450}
+              loading="lazy"
+              format="webp"
+              quality={80}
+            />
+            <p class="image-caption">Light Mode</p>
+          </div>
+          <div class="comparison-item">
+            <Image 
+              src={mobileDarkMode} 
+              alt="BigB MMA website mobile interface in dark mode showing contrast-optimized design" 
+              class="feature-image comparison-image" 
+              width={250} 
+              height={450}
+              loading="lazy"
+              format="webp"
+              quality={80}
+            />
+            <p class="image-caption">Dark Mode</p>
+          </div>
+        </div>
+        <p class="image-caption-main">Mobile-optimized design with both light and dark modes for optimal user experience</p>
+      </div>
+      
+      <h3 class="content-subtitle">Performance Optimization</h3>
+      <p>A fast-loading website is crucial for user engagement and SEO. We implemented numerous performance optimizations to achieve near-perfect scores on Google PageSpeed Insights:</p>
+      
+      <div class="content-image">
+        <Image 
+          src={pagespeedInsights} 
+          alt="Google PageSpeed Insights results showing near-perfect performance scores for BigB MMA website" 
+          class="feature-image" 
+          width={800} 
+          height={400}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <p class="image-caption">Near-perfect PageSpeed Insights scores ensure excellent user experience and SEO benefits</p>
+      </div>
+      
+      <h2 class="section-title">Advanced Technical Implementation</h2>
+      <p>We leveraged cutting-edge web technologies to create a site that's not only beautiful but also highly functional:</p>
+      
+      <div class="feature-blocks grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+        <div class="feature-block">
+          <div class="feature-icon">
+            <span class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon">
+                <path d="M156.6 384.9L125.7 354c-8.5-8.5-11.5-20.8-7.7-32.2c3-8.9 7-20.5 11.8-33.8L24 288c-8.6 0-16.6-4.6-20.9-12.1s-4.2-16.7 .2-24.1l52.5-88.5c13-21.9 36.5-35.3 61.9-35.3l82.3 0c2.4-4 4.8-7.7 7.2-11.3C289.1-4.1 411.1-8.1 483.9 5.3c11.6 2.1 20.6 11.2 22.8 22.8c13.4 72.9 9.3 194.8-111.4 276.7c-3.5 2.4-7.3 4.8-11.3 7.2v82.3c0 25.4-13.4 49-35.3 61.9l-88.5 52.5c-7.4 4.4-16.6 4.5-24.1 .2s-12.1-12.2-12.1-20.9V380.8c-14.1 4.9-26.4 8.9-35.7 11.9c-11.2 3.6-23.4 .5-31.8-7.8zM384 168a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/>
+              </svg>
+            </span>
+          </div>
+          <h4 class="feature-title">Astro Framework</h4>
+          <p>Built with the Astro framework for optimal performance, automatically stripping unnecessary JavaScript from pages</p>
+        </div>
+        
+        <div class="feature-block">
+          <div class="feature-icon">
+            <span class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon">
+                <path d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z"/>
+              </svg>
+            </span>
+          </div>
+          <h4 class="feature-title">Mobile-First Design</h4>
+          <p>Every aspect of the site designed with mobile users in mind, from navigation to content layout</p>
+        </div>
+        
+        <div class="feature-block">
+          <div class="feature-icon">
+            <span class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon">
+                <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+              </svg>
+            </span>
+          </div>
+          <h4 class="feature-title">SEO Optimization</h4>
+          <p>Complete SEO setup including structured data for rich search results and optimal indexing</p>
+        </div>
+      </div>
+      
+      <h3 class="content-subtitle">Content Collections for Scalable Growth</h3>
+      <p>We implemented Astro's Content Collections API to create a scalable, type-safe content management system for the blog and courses sections:</p>
+      
+      <div class="content-image">
+        <Image 
+          src={blogContentCollection} 
+          alt="Code structure diagram showing the blog content collection implementation for BigB MMA website" 
+          class="feature-image" 
+          width={800} 
+          height={400}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <p class="image-caption">The blog content collection provides a structured way to manage articles</p>
+      </div>
+      
+      <div class="content-image mt-8">
+        <Image 
+          src={coursesContentCollection} 
+          alt="Code structure diagram showing the courses content collection implementation for BigB MMA website" 
+          class="feature-image" 
+          width={800} 
+          height={400}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <p class="image-caption">The courses content collection allows easy management of training offerings</p>
+      </div>
+      
+      <h3 class="content-subtitle">Structured Data Implementation</h3>
+      <p>To enhance search visibility and enable rich results in search engines, we implemented comprehensive structured data:</p>
+      
+      <div class="content-image">
+        <Image 
+          src={schemaStructure} 
+          alt="Technical diagram showing structured data schema implementation for improved SEO on BigB MMA website" 
+          class="feature-image" 
+          width={800} 
+          height={400}
+          loading="lazy"
+          format="webp"
+          quality={80}
+        />
+        <p class="image-caption">Structured data implementation enhances search engine understanding of the content</p>
+      </div>
+      
+      <h2 class="section-title">Empowering the Client with AI</h2>
+      <p>One of the most powerful features we implemented was enabling non-technical business owners to easily update their site through AI-powered prompting:</p>
+      
+      <div class="ai-prompt-demo bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-8">
+        <h4 class="font-semibold text-lg mb-2">How Non-Technical Updates Work:</h4>
+        <div class="prompt-example flex flex-col space-y-4">
+          <div class="prompt p-3 bg-white dark:bg-gray-700 rounded-lg">
+            <p class="text-sm font-mono">"Add a new course called 'Advanced Brazilian Jiu-Jitsu' with Coach Thompson on Tuesdays at 7pm"</p>
+          </div>
+          <div class="prompt-result p-3 bg-white dark:bg-gray-700 rounded-lg border-l-4 border-green-500">
+            <p class="text-sm">The AI assistant helps create the new course entry with all required fields, formatting, and integration into the existing site structure.</p>
+          </div>
+        </div>
+      </div>
+      
+      <p class="conclusion">This case demonstrates how our modern tech stack delivers exceptional value for clients beyond just having a good-looking website. By building with Astro, implementing content collections, and incorporating AI-powered editing capabilities, we created a website that's not only beautiful and high-performing but also empowers the business owner to grow their digital presence without ongoing developer dependency.</p>
+    </div>
+  </section>
+  
+  <!-- Testimonial Section -->
+  {caseStudy.testimonial && (
+    <CaseStudyTestimonial
+      quote={caseStudy.testimonial.quote}
+      author={caseStudy.testimonial.author}
+      position={caseStudy.testimonial.position}
+    />
+  )}
+
+  <CaseStudyCta 
+    title="Ready to Build Your High-Performance Website?" 
+    description="Let's create a custom solution that perfectly fits your business needs and empowers you to make updates without technical expertise."
+  />
+</CaseStudyLayout>
+
+<style>
+  /* Hero Section */
+  .case-study-hero {
+    padding: 5rem 0 3rem;
+    background-color: var(--light-bg);
+    text-align: center;
+  }
+  
+  .breadcrumbs {
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    border-radius: 1.5rem;
+  }
+
+  .breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 2rem;
+    max-width: 1440px;
+  }
+
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-family-secondary);
+    font-size: 0.9rem;
+    color: var(--black);
+  }
+
+  .breadcrumbs li:not(:last-child)::after {
+    content: "/";
+    margin-left: 0.5rem;
+    color: var(--black);
+    opacity: 0.4;
+  }
+
+  .breadcrumbs a {
+    color: var(--black);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .breadcrumbs span {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumbs ol {
+      padding: 0 1rem;
+    }
+  }
+  
+  h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+    color: var(--dark-text);
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--body-text);
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    font-family: var(--font-family-secondary);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-image {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 500px;
+    display: block;
+  }
+  
+  /* Overview Section */
+  .case-study-overview {
+    padding: 5rem 0;
+    background-color: #fafafa;
+  }
+  
+  .overview-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .overview-cards {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+  
+  .overview-card {
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    height: 100%;
+  }
+  
+  .client-card {
+    position: relative;
+  }
+  
+  .client-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+  
+  .card-content {
+    font-family: var(--font-family-secondary);
+    color: var(--body-text);
+    line-height: 1.7;
+  }
+  
+  .mt-8 {
+    margin-top: 2rem;
+  }
+  
+  .service-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .service-list li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: var(--body-text);
+    font-family: var(--font-family-secondary);
+  }
+  
+  .service-bullet {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  
+  /* Consultant Profile */
+  .consultant-profile {
+    margin-top: 1rem;
+  }
+  
+  .consultant-details {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1rem;
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+  
+  .consultant-avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 3px solid white;
+  }
+  
+  .consultant-info {
+    flex: 1;
+  }
+  
+  .consultant-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 0.75rem;
+  }
+  
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .linkedin-icon {
+    color: #0077B5;
+  }
+  
+  .github-icon {
+    color: #333;
+  }
+  
+  .social-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark-text);
+  }
+  
+  .social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .case-study-overview {
+      padding: 3rem 0;
+    }
+    
+    .overview-card {
+      padding: 1.5rem;
+    }
+    
+    .consultant-details {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .consultant-avatar {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .social-links {
+      justify-content: center;
+    }
+  }
+  
+  /* Results Section */
+  .results-section {
+    background-color: var(--light-bg);
+    padding: 4rem 0;
+  }
+  
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .results-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .results-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .result-card {
+    background-color: var(--white);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: var(--font-family-secondary);
+  }
+  
+  .result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Content Section */
+  .case-study-content {
+    padding: 4rem 0;
+  }
+  
+  .case-study-content p {
+    margin-bottom: 1.5rem;
+    color: var(--body-text);
+    font-family: var(--font-family-secondary);
+    line-height: 1.7;
+  }
+  
+  .content-image {
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  
+  .feature-image {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 500px;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .image-caption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--body-text);
+    opacity: 0.8;
+    margin-top: 0.75rem;
+    font-style: italic;
+    font-family: var(--font-family-secondary);
+  }
+  
+  .conclusion {
+    margin-top: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  
+  /* Feature Blocks */
+  .feature-blocks {
+    margin: 2.5rem 0;
+  }
+  
+  .feature-block {
+    background-color: var(--white);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .feature-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  }
+  
+  .feature-icon {
+    background-color: rgba(var(--accent-rgb), 0.1);
+    color: var(--accent);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+  
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
+  }
+  
+  .feature-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--dark-text);
+  }
+  
+  /* AI Prompt Demo */
+  .ai-prompt-demo {
+    margin: 2.5rem 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  
+  .prompt-example {
+    margin-top: 1rem;
+  }
+  
+  .prompt, .prompt-result {
+    border-radius: 0.5rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .max-w-xs {
+    max-width: 20rem;
+  }
+  
+  .grid {
+    display: grid;
+  }
+  
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  
+  .gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .mt-8 {
+    margin-top: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .md\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .md\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  
+  /* Image Comparison */
+  .image-comparison {
+    margin: 3rem 0;
+  }
+  
+  .comparison-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .comparison-item {
+    flex: 0 1 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .comparison-image {
+    max-height: 450px;
+    width: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-caption-main {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--dark-text);
+    margin-top: 1.5rem;
+    font-style: italic;
+    font-family: var(--font-family-secondary);
+  }
+  
+  @media (max-width: 768px) {
+    .comparison-container {
+      gap: 1.5rem;
+    }
+    
+    .comparison-item {
+      flex: 0 1 200px;
+    }
+    
+    .comparison-image {
+      max-height: 400px;
+    }
+  }
+
+  /* UX Features */
+  .ux-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0 2.5rem;
+    justify-content: center;
+  }
+  
+  .ux-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--light-bg);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex: 1 1 300px;
+    max-width: 350px;
+  }
+  
+  .ux-feature:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ux-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  
+  .ux-feature span:not(.ux-icon) {
+    font-family: var(--font-family-secondary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: 768px) {
+    .ux-features {
+      gap: 0.75rem;
+    }
+    
+    .ux-feature {
+      padding: 0.6rem 1rem;
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+
+  .logo-container {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  
+  .logo-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Headings for other sections */
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--dark-text);
+    text-align: center;
+  }
+  
+  .content-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: var(--dark-text);
+  }
+  
+  .strategy-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--body-text);
+    font-family: var(--font-family-secondary);
+  }
+
+  /* Remove the old testimonial styling since it's now in the component */
+  .testimonial-section,
+  .testimonial-container,
+  .quote-icon,
+  .testimonial-quote,
+  .testimonial-author,
+  .testimonial-position {
+    display: none;
+  }
+
+</style> 

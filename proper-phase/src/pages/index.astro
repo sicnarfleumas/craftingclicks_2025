@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroCreativeDeck from "../components/HeroCreativeDeck";
+import { caseStudies } from "../data/caseStudies";
+import TrustedByMarquee from "../components/TrustedByMarquee";
+import ServicesBento from "../components/ServicesBento";
+import { services } from "../data/services";
+import ValueProps from "../components/ValueProps.astro";
+import ProcessStepper from "../components/ProcessStepper.astro";
+import FeaturedCaseStudies from "../components/FeaturedCaseStudies.astro";
+import Testimonials from "../components/Testimonials.astro";
+import TeamGrid from "../components/TeamGrid.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+import CTAContact from "../components/CTAContact.astro";
+// Use Pexels thumbnails for now to ensure reliable remote images
+const pexelsDefault = [
+  "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg",
+  "https://images.pexels.com/photos/248616/pexels-photo-248616.jpeg",
+  "https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg",
+  "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg",
+  "https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg",
+  "https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg",
+];
+// Override specific thumbnails per slug
+const pexelsBySlug: Record<string, string> = {
+  "quint-ally": "https://images.pexels.com/photos/103290/pexels-photo-103290.jpeg", // new image
+};
+const base = caseStudies.map((c, i) => ({
+  key: crypto.randomUUID(),
+  slug: c.slug,
+  title: c.title,
+  imageUrl: pexelsBySlug[c.slug] ?? pexelsDefault[i % pexelsDefault.length],
+  tags: c.tags,
+}));
+const cards = Array.from({ length: 4 }).flatMap(() => base.map((c) => ({ ...c, key: crypto.randomUUID() })));
+
+const trustedBy: string[] = [
+  "Noir Creative",
+  "Autonode Interactive",
+  "Quint Ally",
+  "BigB MMA",
+  "Circular Biosphere",
+  "Evo Quest",
+  "Bibilicious",
+  "Mercury Investments",
+  "OPN Advertising",
+  "Moxiefy",
+];
+---
+
+
+<Layout title="Crafting Clicks — 2025">
+  <main>
+    <section class="relative isolate overflow-hidden gradient-hero">
+      <div class="mx-auto max-w-7xl px-6 pt-24 pb-20">
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+          Crafting Websites Without Limits
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg text-neutral-600">
+          An interactive showcase of case studies, performance, and design craft.
+        </p>
+        <div class="mt-8 flex gap-3">
+          <a
+            href="#contact"
+            class="rounded-full bg-orange-500 px-6 py-3 text-white font-semibold shadow hover:bg-orange-600 transition-colors"
+          >Get Started Today</a>
+          <a
+            href="#contact"
+            class="rounded-full border border-neutral-200 px-6 py-3 font-semibold hover:bg-white/70 backdrop-blur transition"
+          >Book a Free Discovery Call</a>
+        </div>
+        <div class="mt-10 h-[68vh] md:h-[72vh] rounded-3xl border border-neutral-200/70 bg-white/60 shadow-sm backdrop-blur">
+          <HeroCreativeDeck client:load cards={cards} />
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="trusted-by-heading" class="section-alt py-16">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="flex items-center justify-center gap-2 text-sm font-medium text-neutral-500">
+          <span class="h-1 w-1 rounded-full bg-neutral-300"></span>
+          <h2 id="trusted-by-heading" class="tracking-wide uppercase">Trusted by</h2>
+          <span class="h-1 w-1 rounded-full bg-neutral-300"></span>
+        </div>
+        <p class="mt-2 text-center text-base text-neutral-600">Ambitious teams and founders we partner with</p>
+
+        <div class="mt-6">
+          <TrustedByMarquee client:load brands={trustedBy} />
+        </div>
+      </div>
+    </section>
+
+    <section id="services" aria-labelledby="services-heading" class="section-soft py-20">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-2xl">
+          <h2 id="services-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">What we do</h2>
+          <p class="mt-2 text-neutral-600">Strategy, design, and development that compound into measurable growth.</p>
+        </div>
+
+        <div class="mt-8">
+          <ServicesBento items={services} />
+        </div>
+      </div>
+    </section>
+
+    <ValueProps />
+    <ProcessStepper />
+    <FeaturedCaseStudies />
+    <Testimonials />
+    <TeamGrid />
+    <FAQAccordion />
+    <CTAContact />
+  </main>
+</Layout>
